@@ -31,10 +31,26 @@ class Blockchain {
 
   // first block, should be add manualy.
   createGenesisBlock() {
-    return new Block(0, Date.now(), 'Genesis block', '0')
+    return new Block(0, '01/01/2020', 'Genesis block', '0')
   }
 
+  // get last block.
+  // used for creating new block, for previousHash field.
   getLatestBlock() {
-    
+    return this.chain[this.chain.length - 1];
+  }
+
+  // add new block to chain.
+  addBlock(newBlock) {
+    newBlock.previousHash = this.getLatestBlock().hash;
+    newBlock.hash = newBlock.calculateHash();
+    this.chain.push(newBlock);
   }
 }
+
+// simple test of blockchain.
+let testCoin = new Blockchain();
+testCoin.addBlock(new Block(1, '16/06/2020', { dollars: 100}));
+testCoin.addBlock(new Block(2, '28/06/2020', { dollars: 300}));
+
+console.log(JSON.stringify(testCoin, null, 4));
