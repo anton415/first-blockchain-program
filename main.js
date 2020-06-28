@@ -21,3 +21,20 @@ class Block {
     return SHA256(this.index + this.previousHash + this.timestamp + JSON.stringify(this.data)).toString();
   }
 }
+
+// Simple blockchain.
+class Blockchain {
+  constructor() {
+    // chain - array of blocks. With first genesis block.
+    this.chain = [this.createGenesisBlock()];
+  }
+
+  // first block, should be add manualy.
+  createGenesisBlock() {
+    return new Block(0, Date.now(), 'Genesis block', '0')
+  }
+
+  getLatestBlock() {
+    
+  }
+}
